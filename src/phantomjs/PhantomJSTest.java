@@ -29,10 +29,10 @@ public class PhantomJSTest {
 
     public static void main(String[] args) {
 
-    	if (ArrayUtils.isEmpty(args)) {
-    		System.err.format("Usage : <URL>");
-    		return;
-    	}
+        if (ArrayUtils.isEmpty(args)) {
+            System.err.format("Usage : <URL>");
+            return;
+        }
         String url = args[0];
         System.out.format("URL   : %s\n", url);
         PhantomJSTest test = new PhantomJSTest();
@@ -44,68 +44,68 @@ public class PhantomJSTest {
     }
 
     /**
-     * PhantomJSDriver‚Ì‰Šúİ’è
+     * PhantomJSDriverã®åˆæœŸè¨­å®š
      */
     private PhantomJSDriver initDriver() {
             DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
-            //PhantomJSƒpƒX‚Ìİ’è
+            //PhantomJSãƒ‘ã‚¹ã®è¨­å®š
             capabilities.setCapability("phantomjs.binary.path", PHANTOMJS_PATH);
-            //PhantomJS‚ÌƒIƒvƒVƒ‡ƒ“İ’è
-            //PhantomJSƒƒOo—Í‚µ‚È‚¢APhantomJsƒƒOo—Íæ
+            //PhantomJSã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³è¨­å®š
+            //PhantomJSãƒ­ã‚°å‡ºåŠ›ã—ãªã„ã€PhantomJsãƒ­ã‚°å‡ºåŠ›å…ˆ
             String[] phantomJsArgs = {"--webdriver-loglevel=NONE",
-            							"--webdriver-logfile=/tmp/phantomjsdriver.log"};
+                                        "--webdriver-logfile=/tmp/phantomjsdriver.log"};
             capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomJsArgs);
-            //JavaScript‚Ì—LŒø/–³Œø
+            //JavaScriptã®æœ‰åŠ¹/ç„¡åŠ¹
             capabilities.setJavascriptEnabled(true);
-            //ƒ^ƒCƒ€ƒAƒEƒgimsjİ’è
+            //ã‚¿ã‚¤ãƒ ã‚¢ã‚¦ãƒˆï¼ˆmsï¼‰è¨­å®š
             capabilities.setCapability("phantomjs.page.settings.resourceTimeout", 10 * 1000);
-            //ƒ†[ƒU[ƒG[ƒWƒFƒ“ƒgİ’è
+            //ãƒ¦ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ¼ã‚¸ã‚§ãƒ³ãƒˆè¨­å®š
             capabilities.setCapability("phantomjs.page.settings.userAgent", "Original UserAgnet");
-            //BASIC”FØƒAƒJƒEƒ“ƒg
+            //BASICèªè¨¼ã‚¢ã‚«ã‚¦ãƒ³ãƒˆ
             capabilities.setCapability("phantomjs.page.settings.userName", "username");
             capabilities.setCapability("phantomjs.page.settings.password", "password");
-            //PhantomJS ‚ÌƒIƒvƒVƒ‡ƒ“ƒpƒ‰ƒ[ƒ^‚ğİ’è‰Â”\B
+            //PhantomJS ã®ã‚ªãƒ—ã‚·ãƒ§ãƒ³ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã‚’è¨­å®šå¯èƒ½ã€‚
             PhantomJSDriver driver = new PhantomJSDriver(capabilities);
             return driver;
     }
 
     /**
-     * cookie‚ğƒZƒbƒg‚·‚é
+     * cookieã‚’ã‚»ãƒƒãƒˆã™ã‚‹
      * @param driver
      * @throws IOException
      */
     private void setCookie(String url, PhantomJSDriver driver) throws JsonSyntaxException, IOException {
 
-    	try{
-    		//Œ»İ‚ÌCookieŠm”F
-    		Set<Cookie> cookieSet = driver.manage().getCookies();
-    		for (Cookie c : cookieSet) {
-    			System.out.format("[Before Cookie] %s", c.toString() + "\n");
-    		}
-    		//JSONƒtƒ@ƒCƒ‹‚©‚çcookie“Ç‚İ‚İiChrome‚©‚ço—Íj
-        	String cookieJsonFile = "c:/tmp/cookie-chrome.txt";
-        	String cookieJson = FileUtils.readFileToString(new File(cookieJsonFile));
-        	JsonArray jsonArray = new Gson().fromJson(cookieJson, JsonArray.class);
-        	for(int i = 0; i < jsonArray.size() ; i++){
-        		JsonElement jsonElement = jsonArray.get(i);
-            	String name = jsonElement.getAsJsonObject().get("name").getAsString();
-            	String value = jsonElement.getAsJsonObject().get("value").getAsString();
-            	//domain‚Í.æ“ª‚ª.‚Å–³‚¢‚ÆƒGƒ‰[(org.openqa.selenium.InvalidCookieDomainException)
-            	String domain = jsonElement.getAsJsonObject().get("domain").getAsString();
-            	if (!StringUtils.startsWith(domain, ".")) {
-            		domain = "." + domain;
-            	}
-            	String path = jsonElement.getAsJsonObject().get("path").getAsString();
-            	Cookie c = new Cookie.Builder(name, value).domain(domain).path(path).build();
+        try{
+            //ç¾åœ¨ã®Cookieç¢ºèª
+            Set<Cookie> cookieSet = driver.manage().getCookies();
+            for (Cookie c : cookieSet) {
+                System.out.format("[Before Cookie] %s", c.toString() + "\n");
+            }
+            //JSONãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰cookieèª­ã¿è¾¼ã¿ï¼ˆChromeã‹ã‚‰å‡ºåŠ›ï¼‰
+            String cookieJsonFile = "c:/tmp/cookie-chrome.txt";
+            String cookieJson = FileUtils.readFileToString(new File(cookieJsonFile));
+            JsonArray jsonArray = new Gson().fromJson(cookieJson, JsonArray.class);
+            for(int i = 0; i < jsonArray.size() ; i++){
+                JsonElement jsonElement = jsonArray.get(i);
+                String name = jsonElement.getAsJsonObject().get("name").getAsString();
+                String value = jsonElement.getAsJsonObject().get("value").getAsString();
+                //domainã¯.å…ˆé ­ãŒ.ã§ç„¡ã„ã¨ã‚¨ãƒ©ãƒ¼(org.openqa.selenium.InvalidCookieDomainException)
+                String domain = jsonElement.getAsJsonObject().get("domain").getAsString();
+                if (!StringUtils.startsWith(domain, ".")) {
+                    domain = "." + domain;
+                }
+                String path = jsonElement.getAsJsonObject().get("path").getAsString();
+                Cookie c = new Cookie.Builder(name, value).domain(domain).path(path).build();
                 driver.manage().addCookie(c);
-    			System.out.format("[Add Cookie] %s", c.toString() + "\n");
-        	}
+                System.out.format("[Add Cookie] %s", c.toString() + "\n");
+            }
         } finally {
-    	}
+        }
     }
 
     /**
-     * ƒTƒCƒgî•ñ‚ğo—Í‚µ‚Ü‚·
+     * ã‚µã‚¤ãƒˆæƒ…å ±ã‚’å‡ºåŠ›ã—ã¾ã™
      * @param url
      */
     private void output(String url) {
@@ -122,18 +122,18 @@ public class PhantomJSTest {
             System.out.println(document.getElementsByTag("body").text());
 
         } catch (JsonSyntaxException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-        	close(driver);
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close(driver);
         }
     }
 
     /**
-     * ƒTƒCƒgƒpƒtƒH[ƒ}ƒ“ƒX‚ğŒv‘ª
+     * ã‚µã‚¤ãƒˆãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹ã‚’è¨ˆæ¸¬
      * @param url
      */
     private void checkSitePerformance(String url) {
@@ -154,13 +154,13 @@ public class PhantomJSTest {
             System.out.format("Response Time : %d\n", responseEndTime - startTime);
             System.out.format("PageLoad Time : %d\n", loadEndTime - startTime);
         } finally {
-        	close(driver);
+            close(driver);
         }
     }
 
 
     /**
-     * ƒy[ƒWƒ[ƒhŠ®—¹‚Ü‚Å‘Ò‚Â
+     * ãƒšãƒ¼ã‚¸ãƒ­ãƒ¼ãƒ‰å®Œäº†ã¾ã§å¾…ã¤
      * @param driver
      */
     void waitForLoad(PhantomJSDriver driver) {
