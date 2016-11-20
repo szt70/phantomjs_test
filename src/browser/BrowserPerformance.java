@@ -1,100 +1,100 @@
 package browser;
 
 /**
- * Selenium‚Å‚Ìƒuƒ‰ƒEƒUƒpƒtƒH[ƒ}ƒ“ƒX
+ * Seleniumã§ã®ãƒ–ãƒ©ã‚¦ã‚¶ãƒ‘ãƒ•ã‚©ãƒ¼ãƒãƒ³ã‚¹
  *
  */
 public class BrowserPerformance {
 
 
-	/**
-	 * ƒŠƒNƒGƒXƒgŠÔ
-	 */
-	private long requestTime;
-	
-	/**
-	 * ƒŒƒXƒ|ƒ“ƒXŠÔ
-	 */
-	private long responseTime;
+    /**
+     * ãƒªã‚¯ã‚¨ã‚¹ãƒˆæ™‚é–“
+     */
+    private long requestTime;
+    
+    /**
+     * ãƒ¬ã‚¹ãƒãƒ³ã‚¹æ™‚é–“
+     */
+    private long responseTime;
 
-	/**
-	 * DNSæ“¾ŠÔ
-	 */
-	private long domainLookupTime;
-	
-	/**
-	 * DOM\’zŠÔ
-	 */
-	private long domLoadingTime;
+    /**
+     * DNSå–å¾—æ™‚é–“
+     */
+    private long domainLookupTime;
+    
+    /**
+     * DOMæ§‹ç¯‰æ™‚é–“
+     */
+    private long domLoadingTime;
 
-	/**
-	 * onLoadƒCƒxƒ“ƒg‚Ìˆ—ŠÔ
-	 */
-	private long loadEventTime;
+    /**
+     * onLoadã‚¤ãƒ™ãƒ³ãƒˆã®å‡¦ç†æ™‚é–“
+     */
+    private long loadEventTime;
 
-	/**
-	 * ƒŒƒ“ƒ_ƒŠƒ“ƒO‚Ìˆ—ŠÔ
-	 * <pre>
-	 * ƒy[ƒW“Ç‚İ‚İ‚©‚çolLoadƒCƒxƒ“ƒgŠ®—¹‚Ü‚Å‚ÌŠÔ
-	 * </pre>
-	 */
-	private long renderingTime;
+    /**
+     * ãƒ¬ãƒ³ãƒ€ãƒªãƒ³ã‚°ã®å‡¦ç†æ™‚é–“
+     * <pre>
+     * ãƒšãƒ¼ã‚¸èª­ã¿è¾¼ã¿ã‹ã‚‰olLoadã‚¤ãƒ™ãƒ³ãƒˆå®Œäº†ã¾ã§ã®æ™‚é–“
+     * </pre>
+     */
+    private long renderingTime;
 
 
-	@Override
-	public String toString() {
-		return "BrowserPerformance [requestTime=" + requestTime + ", responseTime=" + responseTime
-				+ ", domainLookupTime=" + domainLookupTime + ", domLoadingTime=" + domLoadingTime + ", loadEventTime="
-				+ loadEventTime + ", renderingTime=" + renderingTime + "]";
-	}
+    @Override
+    public String toString() {
+        return "BrowserPerformance [requestTime=" + requestTime + ", responseTime=" + responseTime
+                + ", domainLookupTime=" + domainLookupTime + ", domLoadingTime=" + domLoadingTime + ", loadEventTime="
+                + loadEventTime + ", renderingTime=" + renderingTime + "]";
+    }
 
-	public long getRequestTime() {
-		return requestTime;
-	}
+    public long getRequestTime() {
+        return requestTime;
+    }
 
-	public void setRequestTime(long requestTime) {
-		this.requestTime = requestTime;
-	}
+    public void setRequestTime(long requestTime) {
+        this.requestTime = requestTime;
+    }
 
-	public long getResponseTime() {
-		return responseTime;
-	}
+    public long getResponseTime() {
+        return responseTime;
+    }
 
-	public void setResponseTime(long responseTime) {
-		this.responseTime = responseTime;
-	}
+    public void setResponseTime(long responseTime) {
+        this.responseTime = responseTime;
+    }
 
-	public long getDomainLookupTime() {
-		return domainLookupTime;
-	}
+    public long getDomainLookupTime() {
+        return domainLookupTime;
+    }
 
-	public void setDomainLookupTime(long domainLookupTime) {
-		this.domainLookupTime = domainLookupTime;
-	}
+    public void setDomainLookupTime(long domainLookupTime) {
+        this.domainLookupTime = domainLookupTime;
+    }
 
-	public long getDomLoadingTime() {
-		return domLoadingTime;
-	}
+    public long getDomLoadingTime() {
+        return domLoadingTime;
+    }
 
-	public void setDomLoadingTime(long domLoadingTime) {
-		this.domLoadingTime = domLoadingTime;
-	}
+    public void setDomLoadingTime(long domLoadingTime) {
+        this.domLoadingTime = domLoadingTime;
+    }
 
-	public long getLoadEventTime() {
-		return loadEventTime;
-	}
+    public long getLoadEventTime() {
+        return loadEventTime;
+    }
 
-	public void setLoadEventTime(long loadEventTime) {
-		this.loadEventTime = loadEventTime;
-	}
+    public void setLoadEventTime(long loadEventTime) {
+        this.loadEventTime = loadEventTime;
+    }
 
-	public long getRenderingTime() {
-		return renderingTime;
-	}
+    public long getRenderingTime() {
+        return renderingTime;
+    }
 
-	public void setRenderingTime(long renderingTime) {
-		this.renderingTime = renderingTime;
-	}
-	
-	
+    public void setRenderingTime(long renderingTime) {
+        this.renderingTime = renderingTime;
+    }
+    
+    
 }

@@ -25,30 +25,30 @@ public class ImageGenerator {
 	}
 
     /**
-     * ‰üsƒR[ƒh
+     * æ”¹è¡Œã‚³ãƒ¼ãƒ‰
      */
     public static final String LINE_SEPARATOR = System.getProperty("line.separator");
             
 	public static boolean writeTextImage () throws IOException {
 		
-        // o—Í‚·‚é•¶š—ñ
+        // å‡ºåŠ›ã™ã‚‹æ–‡å­—åˆ—
         StringBuilder text = new StringBuilder();
 
         String dateStr = DateTimeUtils.getDateTimeFormat("yyyy-MM-dd-HHmm");
-        //ƒeƒ“ƒvƒŒ[ƒg‰æ‘œ
+        //ãƒ†ãƒ³ãƒ—ãƒ¬ãƒ¼ãƒˆç”»åƒ
         String filePath = "c:/tmp/template.png";
         String outputPath = "c:/tmp/image" + dateStr + ".png";
         BufferedImage bufferedImage = ImageIO.read(new File(filePath));
         text.append(dateStr);
  
-        // •¶š—ñ‚ğ‘‚«‚¾‚·ˆÊ’u
+        // æ–‡å­—åˆ—ã‚’æ›¸ãã ã™ä½ç½®
         float y = 30;
         float x = 30;
  
-        // •¶š—ñ‚ğ‘‚«‚¾‚·—Ìˆæ‚Ì•
+        // æ–‡å­—åˆ—ã‚’æ›¸ãã ã™é ˜åŸŸã®å¹…
         float wrappingWidth = bufferedImage.getWidth() - (x * 2);
         AttributedString as = new AttributedString(text.toString());
-        as.addAttribute(TextAttribute.FONT, new Font("MS ƒSƒVƒbƒN", Font.BOLD, 15));
+        as.addAttribute(TextAttribute.FONT, new Font("MS ã‚´ã‚·ãƒƒã‚¯", Font.BOLD, 15));
         as.addAttribute(TextAttribute.FOREGROUND, Color.BLACK);
         as.addAttribute(TextAttribute.BACKGROUND, new Color(0, 0, 0, 0));
  
@@ -59,38 +59,38 @@ public class ImageGenerator {
  
         int position;
  
-        // •¶š—ñ‚ÌÅŒã‚Ü‚Å
+        // æ–‡å­—åˆ—ã®æœ€å¾Œã¾ã§
         while ((position = measurer.getPosition()) < text.length()) {
             TextLayout layout;
-            // ‰üsƒ`ƒFƒbƒN
+            // æ”¹è¡Œãƒã‚§ãƒƒã‚¯
             int indexOf = text.indexOf(LINE_SEPARATOR, position);
  
-            // ‰üs‚µ‚Ä‚éê‡
+            // æ”¹è¡Œã—ã¦ã‚‹å ´åˆ
             if (position < indexOf) {
-                // ‰üsˆÊ’u‚Ìè‘O‚Ì•ª‚Ü‚ÅƒŒƒCƒAƒEƒg‚à‚Á‚Ä‚­‚é
+                // æ”¹è¡Œä½ç½®ã®æ‰‹å‰ã®åˆ†ã¾ã§ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã‚‚ã£ã¦ãã‚‹
                 layout = measurer.nextLayout(wrappingWidth, indexOf, false);
             }
             else {
-                // ©“®‚ÅÜ‚è•Ô‚µ‚Ä‚é‚Æ‚±‚Ü‚ÅƒŒƒCƒAƒEƒg‚Á‚Ä‚­‚é
+                // è‡ªå‹•ã§æŠ˜ã‚Šè¿”ã—ã¦ã‚‹ã¨ã“ã¾ã§ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆæŒã£ã¦ãã‚‹
                 layout = measurer.nextLayout(wrappingWidth);
             }
  
-            // ƒŒƒCƒAƒEƒg‚Æ‚ê‚È‚©‚Á‚½
+            // ãƒ¬ã‚¤ã‚¢ã‚¦ãƒˆã¨ã‚Œãªã‹ã£ãŸ
             if (layout == null) {
                 break;
             }
  
-            // YÀ•W‚ğXVi‚³‚Á‚«‚ÌˆÊ’u‚ğƒx[ƒXƒ‰ƒCƒ“‚Ìã‚Æ‚µ‚ÄAƒx[ƒXƒ‰ƒCƒ“‚É‡‚í‚¹‚éj
+            // Yåº§æ¨™ã‚’æ›´æ–°ï¼ˆã•ã£ãã®ä½ç½®ã‚’ãƒ™ãƒ¼ã‚¹ãƒ©ã‚¤ãƒ³ã®ä¸Šã¨ã—ã¦ã€ãƒ™ãƒ¼ã‚¹ãƒ©ã‚¤ãƒ³ã«åˆã‚ã›ã‚‹ï¼‰
             y += layout.getAscent();
             float dx = layout.isLeftToRight() ? 0 : (wrappingWidth - layout
                     .getAdvance());
-            // •¶š—ñ‚ğ‘‚«‚¾‚·
+            // æ–‡å­—åˆ—ã‚’æ›¸ãã ã™
             layout.draw(g2, x + dx, y);
-            // YÀ•W‚ğXViƒx[ƒXƒ‰ƒCƒ“‚Ì‰º + sŠÔj
+            // Yåº§æ¨™ã‚’æ›´æ–°ï¼ˆãƒ™ãƒ¼ã‚¹ãƒ©ã‚¤ãƒ³ã®ä¸‹ + è¡Œé–“ï¼‰
             y += layout.getDescent() + layout.getLeading();
         }
  
-        // ‘‚«o‚µ
+        // æ›¸ãå‡ºã—
         ImageIO.write(bufferedImage, "png", new File(outputPath));
         return true;
 	}

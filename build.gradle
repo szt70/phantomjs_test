@@ -1,0 +1,43 @@
+apply plugin: 'java'
+
+defaultTasks 'copyEnvironmentConfig', 'build' 
+
+//Java文字コードエンコード
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+//環境ごとの設定ファイル上書き
+task copyEnvironmentConfig(type: Copy) {
+	//ex) 引数に指定 -Penv=jenkins
+	if (project.hasProperty('env')) {
+	    from "resources/environment/${env}/"
+	    into "resources/"
+	} else {
+		println "use default environment"
+	}
+}
+
+sourceSets.main.output.classesDir = file("$buildDir/classes")
+sourceSets.main.output.resourcesDir = file("$buildDir/classes")
+    
+sourceSets {
+	main {
+	    java {
+	        srcDir 'src/'
+	    }
+        resources {
+            srcDir 'resources'
+        }
+	}
+    test {
+      java {
+        srcDir 'test/site'
+      }
+    }
+}
+
+dependencies {
+  compile fileTree(dir: './lib', includes: ['*.jar'])
+  testCompile fileTree(dir: './lib', includes: ['*.jar'])
+}

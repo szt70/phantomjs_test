@@ -1,4 +1,9 @@
 eclipse.preferences.version=1
+encoding//src/browser/BrowserPerformance.java=UTF-8
+encoding//src/com/szt70/common/DateTimeUtils.java=UTF-8
+encoding//src/image/ImageGenerator.java=UTF-8
 encoding//src/phantomjs/PhantomJSTest.java=UTF-8
 encoding//src/phantomjs/PhantomJsUtils.java=UTF-8
-encoding//src/test/SiteTest.java=UTF-8
+encoding//test/api/HogeTest.java=UTF-8
+encoding//test/site/MypageTest.java=UTF-8
+encoding/<project>=UTF-8

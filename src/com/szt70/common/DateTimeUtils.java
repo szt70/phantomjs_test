@@ -7,55 +7,55 @@ import java.util.Date;
 import java.util.Locale;
 
 /**
- * “ú•tEŠÔŠÖ˜Aˆ—
+ * æ—¥ä»˜ãƒ»æ™‚é–“é–¢é€£å‡¦ç†
  * @author 
  *
  */
 public class DateTimeUtils {
 
-	public static void main(String[] args) {
-		// TODO ©“®¶¬‚³‚ê‚½ƒƒ\ƒbƒhEƒXƒ^ƒu
+    public static void main(String[] args) {
+        // TODO è‡ªå‹•ç”Ÿæˆã•ã‚ŒãŸãƒ¡ã‚½ãƒƒãƒ‰ãƒ»ã‚¹ã‚¿ãƒ–
 
-	}
+    }
 
-	/**
-	 * w’è‚µ‚½ƒtƒH[ƒ}ƒbƒg‚Å“ú‚ğæ“¾
-	 * @param format	ƒtƒH[ƒ}ƒbƒg•¶š—ñ
-	 * @param locale
-	 * @return
-	 */
-	public static String getDateTimeFormat (String format) {
-		return getDateTimeFormat(format, null);
-	}
-	
-	/**
-	 * w’è‚µ‚½ƒtƒH[ƒ}ƒbƒg‚Å“ú‚ğæ“¾
-	 * @param format	ƒtƒH[ƒ}ƒbƒg•¶š—ñ
-	 * @param locale
-	 * @return
-	 */
-	public static String getDateTimeFormat (String format, Locale locale) {
+    /**
+     * æŒ‡å®šã—ãŸãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§æ—¥æ™‚ã‚’å–å¾—
+     * @param format    ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—
+     * @param locale
+     * @return
+     */
+    public static String getDateTimeFormat (String format) {
+        return getDateTimeFormat(format, null);
+    }
+    
+    /**
+     * æŒ‡å®šã—ãŸãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆã§æ—¥æ™‚ã‚’å–å¾—
+     * @param format    ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—
+     * @param locale
+     * @return
+     */
+    public static String getDateTimeFormat (String format, Locale locale) {
         Calendar c = Calendar.getInstance();
         SimpleDateFormat sdf = null;
         if (locale != null) {
-        	sdf = new SimpleDateFormat(format, locale);
+            sdf = new SimpleDateFormat(format, locale);
         } else {
-        	sdf = new SimpleDateFormat(format);
+            sdf = new SimpleDateFormat(format);
         }
         return sdf.format(c.getTime());
-	}
-	
-	/**
-	 * “ú•t•¶š—ñ‚ğDateŒ^‚É•ÏŠ·‚µ‚Ü‚·
-	 * @param dateStr	“ú•t•¶š—ñ
-	 * @param format	ƒtƒH[ƒ}ƒbƒg•¶š—ñ
-	 * @return
-	 * @throws ParseException
-	 */
-	public static Date convertStrToDate(String dateStr, String format) throws ParseException {
+    }
+    
+    /**
+     * æ—¥ä»˜æ–‡å­—åˆ—ã‚’Dateå‹ã«å¤‰æ›ã—ã¾ã™
+     * @param dateStr   æ—¥ä»˜æ–‡å­—åˆ—
+     * @param format    ãƒ•ã‚©ãƒ¼ãƒãƒƒãƒˆæ–‡å­—åˆ—
+     * @return
+     * @throws ParseException
+     */
+    public static Date convertStrToDate(String dateStr, String format) throws ParseException {
 
         SimpleDateFormat sdf = new SimpleDateFormat(format);
         Date formatDate = sdf.parse(dateStr);
         return formatDate;
-	}
+    }
 }

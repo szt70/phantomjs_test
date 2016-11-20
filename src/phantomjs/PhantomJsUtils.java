@@ -4,6 +4,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
+import org.apache.commons.configuration2.Configuration;
+import org.apache.commons.configuration2.PropertiesConfiguration;
+import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -29,7 +32,6 @@ import browser.BrowserPerformance;
 public class PhantomJsUtils {
 
 	Logger LOG = Logger.getLogger(PhantomJsUtils.class.getSimpleName());
-    private static final String PHANTOMJS_PATH = "c:/phantomjs-2.1.1/bin/phantomjs.exe";
     
     /**
      * デフォルトのUA
@@ -71,15 +73,24 @@ public class PhantomJsUtils {
 
     /**
      * PhantomJSDriverの初期設定
+     * @throws PhantomJsException 
      */
-    public PhantomJSDriver getDriver() {
+    public PhantomJSDriver getDriver() throws PhantomJsException {
+        Configurations configs = new Configurations();
+        
+    	try {
+    		//need commons-beanutils.jar
+            Configuration config = configs.properties("phantomjs.properties");
+            String driverPath = config.getString("phantomjs.driver");
+            String phantomJsLog = config.getString("phantomjs.log");
+            
             DesiredCapabilities capabilities = DesiredCapabilities.phantomjs();
             //PhantomJSパスの設定
-            capabilities.setCapability("phantomjs.binary.path", PHANTOMJS_PATH);
+            capabilities.setCapability("phantomjs.binary.path", driverPath);
             //PhantomJSのオプション設定
             //PhantomJSログ出力しない、PhantomJsログ出力先
             String[] phantomJsArgs = {"--webdriver-loglevel=NONE",
-                                        "--webdriver-logfile=/tmp/phantomjsdriver.log"};
+                                        "--webdriver-logfile=" + phantomJsLog};
             capabilities.setCapability(PhantomJSDriverService.PHANTOMJS_CLI_ARGS, phantomJsArgs);
             //JavaScriptの有効/無効
             capabilities.setJavascriptEnabled(true);
@@ -93,6 +104,9 @@ public class PhantomJsUtils {
             //PhantomJS のオプションパラメータを設定可能。
             PhantomJSDriver driver = new PhantomJSDriver(capabilities);
             return driver;
+		} catch (Exception e) {
+			throw new PhantomJsException(e);
+		}
     }
 
     /**
@@ -181,7 +195,9 @@ public class PhantomJsUtils {
             performance.setResponseTime(responseEndTime - startTime);
             performance.setDomLoadingTime(domLoadEndTime - domLoadStartTime);
             performance.setRenderingTime(loadEndTime - startTime);
-        } finally {
+        } catch (PhantomJsException e) {
+        	LOG.error("url : " + url, e);
+		} finally {
             close(driver);
         }
         return performance;

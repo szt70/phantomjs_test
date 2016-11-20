@@ -23,57 +23,57 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import phantomjs.PhantomJsUtils;
 
 public class MypageTest {
-	
-	private static PhantomJsUtils phantomJs = null;
-	private static PhantomJSDriver driver = null;
+    
+    private static PhantomJsUtils phantomJs = null;
+    private static PhantomJSDriver driver = null;
 
-	/**
-	 * ƒeƒXƒgƒNƒ‰ƒX‚ÌstaticƒCƒjƒVƒƒƒ‰ƒCƒU‚ÌŒã‚ÉŒÄ‚Î‚ê‚éB
-	 * @throws Exception
-	 */
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-		phantomJs = new PhantomJsUtils();
-		driver = phantomJs.getDriver();
-		String cookieJsonFilePath = "c:/tmp/mypage-cookie.json";
-		phantomJs.setCookie(driver, cookieJsonFilePath);
-	}
+    /**
+     * ãƒ†ã‚¹ãƒˆã‚¯ãƒ©ã‚¹ã®staticã‚¤ãƒ‹ã‚·ãƒ£ãƒ©ã‚¤ã‚¶ã®å¾Œã«å‘¼ã°ã‚Œã‚‹ã€‚
+     * @throws Exception
+     */
+    @BeforeClass
+    public static void setUpBeforeClass() throws Exception {
+        phantomJs = new PhantomJsUtils();
+        driver = phantomJs.getDriver();
+        String cookieJsonFilePath = "c:/tmp/mypage-cookie.json";
+        phantomJs.setCookie(driver, cookieJsonFilePath);
+    }
  
-	/**
-	 * ƒeƒXƒgƒNƒ‰ƒXÀsŒã‚ÉÀs‚µ‚½‚¢ƒƒ\ƒbƒh
-	 * @throws Exception
-	 */
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-		phantomJs.close(driver);
-	}
+    /**
+     * ãƒ†ã‚¹ãƒˆã‚¯ãƒ©ã‚¹å®Ÿè¡Œå¾Œã«å®Ÿè¡Œã—ãŸã„ãƒ¡ã‚½ãƒƒãƒ‰
+     * @throws Exception
+     */
+    @AfterClass
+    public static void tearDownAfterClass() throws Exception {
+        phantomJs.close(driver);
+    }
  
-	/**
-	 * ƒeƒXƒgƒƒ\ƒbƒh‘O‚ÉŒÄ‚Î‚ê‚é
-	 * @throws Exception
-	 */
-	@Before
-	public void setUp() throws Exception {
-	}
+    /**
+     * ãƒ†ã‚¹ãƒˆãƒ¡ã‚½ãƒƒãƒ‰å‰ã«å‘¼ã°ã‚Œã‚‹
+     * @throws Exception
+     */
+    @Before
+    public void setUp() throws Exception {
+    }
  
-	/**
-	 * ƒeƒXƒgƒƒ\ƒbƒhÀsŒã‚ÉÀs‚µ‚½‚¢ƒƒ\ƒbƒh
-	 * @throws Exception
-	 */
-	@After
-	public void tearDown() throws Exception {
-	}
+    /**
+     * ãƒ†ã‚¹ãƒˆãƒ¡ã‚½ãƒƒãƒ‰å®Ÿè¡Œå¾Œã«å®Ÿè¡Œã—ãŸã„ãƒ¡ã‚½ãƒƒãƒ‰
+     * @throws Exception
+     */
+    @After
+    public void tearDown() throws Exception {
+    }
  
-	
-	/**
-	 * ƒ}ƒCƒy[ƒW‚Ì“–“úƒ|ƒCƒ“ƒg‚ğƒ`ƒFƒbƒN
-	 * <pre>
-	 * “–“ú‚ÌINƒ|ƒCƒ“ƒg‚Ì’lŠm”FA0ƒ|ƒCƒ“ƒg‚Å–³‚¯‚ê‚ÎOK
-	 * </pre>
-	 * @throws Exception
-	 */
-	@Test
-	public void testMypageInPoint() throws Exception {
+    
+    /**
+     * ãƒã‚¤ãƒšãƒ¼ã‚¸ã®å½“æ—¥ãƒã‚¤ãƒ³ãƒˆã‚’ãƒã‚§ãƒƒã‚¯
+     * <pre>
+     * å½“æ—¥ã®INãƒã‚¤ãƒ³ãƒˆã®å€¤ç¢ºèªã€0ãƒã‚¤ãƒ³ãƒˆã§ç„¡ã‘ã‚Œã°OK
+     * </pre>
+     * @throws Exception
+     */
+    @Test
+    public void testMypageInPoint() throws Exception {
         String url = "https://mypage.blogmura.com/";
         driver.get(url);
         phantomJs.waitForLoad(driver);
@@ -82,67 +82,67 @@ public class MypageTest {
         Elements eles = document.select("tr .rank_point_data");
         Element element = null;
         for (Element els : eles) {
-            if (StringUtils.contains(els.text(), "INƒ|ƒCƒ“ƒg")) {
+            if (StringUtils.contains(els.text(), "INãƒã‚¤ãƒ³ãƒˆ")) {
                 element = els;
             }
         }
         
         if (element != null) {
             String str = element.select("td").get(0).text();
-            assertNotEquals("“–“ú‚ÌINƒ|ƒCƒ“ƒg‚ª0‚Å‚·B", str, "0");
+            assertNotEquals("å½“æ—¥ã®INãƒã‚¤ãƒ³ãƒˆãŒ0ã§ã™ã€‚", str, "0");
             
         } else {
-            fail("ƒ^ƒO‚ªŒ©‚Â‚©‚è‚Ü‚¹‚ñ‚Å‚µ‚½B");
+            fail("ã‚¿ã‚°ãŒè¦‹ã¤ã‹ã‚Šã¾ã›ã‚“ã§ã—ãŸã€‚");
         }
         phantomJs.close(driver);
-	}
-	
-	/**
-	 * “o˜^î•ñ•ÏX
-	 * <pre>
-	 * ©—R•¶‚ğ•ÏX‚µ‚Ä“o˜^î•ñ•ÏX
-	 * Às‘OŒã‚Å‰æ‘œŒ”‚ª“™‚µ‚¯‚ê‚ÎOK
-	 * </pre>
-	 * @throws Exception
-	 */
-	@Test
-	public void testUserInfo() throws Exception {
+    }
+    
+    /**
+     * ç™»éŒ²æƒ…å ±å¤‰æ›´
+     * <pre>
+     * è‡ªç”±æ–‡ã‚’å¤‰æ›´ã—ã¦ç™»éŒ²æƒ…å ±å¤‰æ›´
+     * å®Ÿè¡Œå‰å¾Œã§ç”»åƒä»¶æ•°ãŒç­‰ã—ã‘ã‚Œã°OK
+     * </pre>
+     * @throws Exception
+     */
+    @Test
+    public void testUserInfo() throws Exception {
         String url = "https://mypage.blogmura.com/join_input";
         driver.get(url);
         phantomJs.waitForLoad(driver);
 
         StringBuilder desc = new StringBuilder();
-        desc.append(new Date() + " ƒeƒXƒg—p‚Ì•¶Í");
-        //©—R•¶‚ğ“ü—Í‚µ‚ÄƒTƒuƒ~ƒbƒgƒ{ƒ^ƒ“‰Ÿ‰º
+        desc.append(new Date() + " ãƒ†ã‚¹ãƒˆç”¨ã®æ–‡ç« ");
+        //è‡ªç”±æ–‡ã‚’å…¥åŠ›ã—ã¦ã‚µãƒ–ãƒŸãƒƒãƒˆãƒœã‚¿ãƒ³æŠ¼ä¸‹
         WebElement eleFreeText = driver.findElement(By.name("freetext"));
         eleFreeText.clear();
         eleFreeText.sendKeys(desc);
         driver.findElement(By.name("submit1")).click();
 
         Document documentConfirm = Jsoup.parse(driver.getPageSource());
-        if (!StringUtils.contains(documentConfirm.text(), "“à—e‚ª‚±‚ê‚Å‚æ‚ë‚µ‚¯‚ê‚Îu“o˜^vƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚ÄŠm’è‚µ‚Ä‚­‚¾‚³‚¢B")) {
-        	fail("“o˜^Šm”F‰æ–Ê‚ÅƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B");
+        if (!StringUtils.contains(documentConfirm.text(), "å†…å®¹ãŒã“ã‚Œã§ã‚ˆã‚ã—ã‘ã‚Œã°ã€Œç™»éŒ²ã€ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ã¦ç¢ºå®šã—ã¦ãã ã•ã„ã€‚")) {
+            fail("ç™»éŒ²ç¢ºèªç”»é¢ã§ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚");
         }
 
-        //Šm”F‰æ–Ê‚Åu“o˜^v‰Ÿ‰º
+        //ç¢ºèªç”»é¢ã§ã€Œç™»éŒ²ã€æŠ¼ä¸‹
         driver.findElement(By.name("submit1")).click();
         
-        //Š®—¹‰æ–Ê
+        //å®Œäº†ç”»é¢
         Document document = Jsoup.parse(driver.getPageSource());
-        if (!StringUtils.contains(document.text(), "ƒ‰ƒ“ƒLƒ“ƒO‚É‚²Q‰Á‚¢‚½‚¾‚­‚½‚ß‚ÉA‚Ü‚¸‚Í“\‚Á‚Ä‚İ‚Ü‚µ‚å‚¤")) {
-        	fail("“o˜^Às‚ÅƒGƒ‰[‚ª”­¶‚µ‚Ü‚µ‚½B");
+        if (!StringUtils.contains(document.text(), "ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã«ã”å‚åŠ ã„ãŸã ããŸã‚ã«ã€ã¾ãšã¯è²¼ã£ã¦ã¿ã¾ã—ã‚‡ã†")) {
+            fail("ç™»éŒ²å®Ÿè¡Œã§ã‚¨ãƒ©ãƒ¼ãŒç™ºç”Ÿã—ã¾ã—ãŸã€‚");
         }
-	}
-	
-	/**
-	 * ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ğƒAƒbƒvƒ[ƒh
-	 * <pre>
-	 * Šù‚É3Œ“o˜^‚³‚ê‚Ä‚¢‚éê‡‚Íˆê”ÔŒã‚ë‚Ì‰æ‘œ‚ğíœ‚µƒAƒbƒvƒ[ƒh‚·‚é
-	 * </pre>
-	 * @throws Exception
-	 */
-	@Test
-	public void testProfileImageUpload() throws Exception {
+    }
+    
+    /**
+     * ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒã‚’ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰
+     * <pre>
+     * æ—¢ã«3ä»¶ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹å ´åˆã¯ä¸€ç•ªå¾Œã‚ã®ç”»åƒã‚’å‰Šé™¤ã—ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰ã™ã‚‹
+     * </pre>
+     * @throws Exception
+     */
+    @Test
+    public void testProfileImageUpload() throws Exception {
 
         String url = "https://mypage.blogmura.com/profpicup";
         driver.get(url);
@@ -151,17 +151,17 @@ public class MypageTest {
         Document documentBefore = Jsoup.parse(driver.getPageSource());
         Elements img = documentBefore.select("[src^=http://image.blogmura.com]");
         int beforeCount = img.size();
-        //ƒvƒƒtƒB[ƒ‹‰æ‘œ‚ªMaxŒ”‚Ìê‡‚ÍÅŒã‚Ì‰æ‘œ‚ğíœ
+        //ãƒ—ãƒ­ãƒ•ã‚£ãƒ¼ãƒ«ç”»åƒãŒMaxä»¶æ•°ã®å ´åˆã¯æœ€å¾Œã®ç”»åƒã‚’å‰Šé™¤
         if (beforeCount == 3) {
 
-        	List<WebElement> del = driver.findElements(By.linkText("íœ"));
-        	del.get(2).click();
-        	//Šm”F‰æ–Ê‚Ö‘JˆÚ
+            List<WebElement> del = driver.findElements(By.linkText("å‰Šé™¤"));
+            del.get(2).click();
+            //ç¢ºèªç”»é¢ã¸é·ç§»
             phantomJs.waitForLoad(driver);
             driver.findElement(By.name("submit1")).click();
         }
         
-        //ƒAƒbƒvƒ[ƒh
+        //ã‚¢ãƒƒãƒ—ãƒ­ãƒ¼ãƒ‰
         driver.findElement(By.id("filename")).sendKeys("c:/tmp/template.png");
         driver.findElement(By.id("sb")).click();
         phantomJs.waitForLoad(driver);
@@ -170,17 +170,17 @@ public class MypageTest {
         int afterCount = img.size();
         
         assertThat(beforeCount, is(afterCount));
-	}
-	
+    }
+    
 
-	/**
-	 * ƒ}ƒCƒoƒi[‚ÌƒŠƒ“ƒNæ³í¶Šm”F
-	 * <pre>
-	 * </pre>
-	 * @throws Exception
-	 */
-	@Test
-	public void testMyBannerList() throws Exception {
+    /**
+     * ãƒã‚¤ãƒãƒŠãƒ¼ã®ãƒªãƒ³ã‚¯å…ˆæ­£å¸¸ç”Ÿç¢ºèª
+     * <pre>
+     * </pre>
+     * @throws Exception
+     */
+    @Test
+    public void testMyBannerList() throws Exception {
 
         String url = "http://mypage.blogmura.com/join_comp";
         driver.get(url);
@@ -188,42 +188,42 @@ public class MypageTest {
         
         Document document = Jsoup.parse(driver.getPageSource());
 
-        //ƒJƒeƒSƒŠ‚ªw’è‚³‚ê‚Ä‚È‚¢ƒ}ƒCƒoƒi[‚ğ‘ÎÛ‚Éƒ`ƒFƒbƒN
+        //ã‚«ãƒ†ã‚´ãƒªãŒæŒ‡å®šã•ã‚Œã¦ãªã„ãƒã‚¤ãƒãƒŠãƒ¼ã‚’å¯¾è±¡ã«ãƒã‚§ãƒƒã‚¯
         int index = 0;
         Elements titles = document.select("th.title");
         for (Element ele: titles) {
-        	if (ele.text().contains("‚É‚Ù‚ñƒuƒƒO‘º")) {
-        		break;
-        	}
-        	index++;
+            if (ele.text().contains("ã«ã»ã‚“ãƒ–ãƒ­ã‚°æ‘")) {
+                break;
+            }
+            index++;
         }
 
-        //INƒ‰ƒ“ƒLƒ“ƒO@‚Ìƒ`ƒFƒbƒNó‘Ôæ“¾
+        //INãƒ©ãƒ³ã‚­ãƒ³ã‚°ã€€ã®ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹å–å¾—
         boolean checkNewWindow = driver.findElement(By.id("check_inrank")).isSelected();
-        //‚Ü‚¸‚ÍINƒ‰ƒ“ƒLƒ“ƒOƒ`ƒFƒbƒNó‘Ô
+        //ã¾ãšã¯INãƒ©ãƒ³ã‚­ãƒ³ã‚°ãƒã‚§ãƒƒã‚¯çŠ¶æ…‹
         if (!checkNewWindow) {
-        	driver.findElement(By.id("check_inrank")).click();
-        	phantomJs.waitForLoad(driver);	
+            driver.findElement(By.id("check_inrank")).click();
+            phantomJs.waitForLoad(driver);  
         }
         Element area = document.select("textarea.text").get(index);
         String link = Jsoup.parse(area.val()).select("a").get(index).attr("href");
         assertThat(link, is("//www.blogmura.com/ranking.html"));
         
-        //OUTƒ‰ƒ“ƒLƒ“ƒO
+        //OUTãƒ©ãƒ³ã‚­ãƒ³ã‚°
         driver.findElement(By.id("check_outrank")).click();
-    	phantomJs.waitForLoad(driver);
-    	document = Jsoup.parse(driver.getPageSource());
+        phantomJs.waitForLoad(driver);
+        document = Jsoup.parse(driver.getPageSource());
         area = document.select("textarea.text").get(index);
-        link = Jsoup.parse(area.val()).select("a").get(index).attr("href");	
+        link = Jsoup.parse(area.val()).select("a").get(index).attr("href"); 
         assertThat(link, is("//www.blogmura.com/ranking_out.html"));
         
-        //PVƒ‰ƒ“ƒLƒ“ƒO
+        //PVãƒ©ãƒ³ã‚­ãƒ³ã‚°
         driver.findElement(By.id("check_pvrank")).click();
-    	phantomJs.waitForLoad(driver);
-    	document = Jsoup.parse(driver.getPageSource());
+        phantomJs.waitForLoad(driver);
+        document = Jsoup.parse(driver.getPageSource());
         area = document.select("textarea.text").get(index);
-        link = Jsoup.parse(area.val()).select("a").get(index).attr("href");	
+        link = Jsoup.parse(area.val()).select("a").get(index).attr("href"); 
         assertThat(link, is("//www.blogmura.com/ranking_pv.html"));
-	}
-	
+    }
+    
 }
