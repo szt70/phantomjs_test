@@ -35,7 +35,7 @@ public class MypageTest {
     public static void setUpBeforeClass() throws Exception {
         phantomJs = new PhantomJsUtils();
         driver = phantomJs.getDriver();
-        String cookieJsonFilePath = "c:/tmp/mypage-cookie.json";
+        String cookieJsonFilePath = "/var/resource/mypage-cookie.json";
         phantomJs.setCookie(driver, cookieJsonFilePath);
     }
  
